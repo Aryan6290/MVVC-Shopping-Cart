@@ -2,7 +2,7 @@ package com.example.mvvm_shopping_cart.models
 
 import androidx.recyclerview.widget.DiffUtil
 
-class ProductModel(var id : Number,var  name : String,var  imageUrl : String, var price : Number, var isAvailable : Boolean) {
+class ProductModel(var id : String,var  name : String,var price : Number,  var isAvailable : Boolean,var  imageUrl : String) {
     override fun toString(): String {
         return super.toString()
     }
