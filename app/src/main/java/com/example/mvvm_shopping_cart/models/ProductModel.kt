@@ -11,7 +11,7 @@ class ProductModel(var id : String,var  name : String,var price : Number,  var i
         return super.equals(other)
     }
 
-    class ShopItemCallBack : DiffUtil.ItemCallback<ProductModel>() {
+    class itemCallBack : DiffUtil.ItemCallback<ProductModel>() {
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
             return newItem.id == oldItem.id;
         }

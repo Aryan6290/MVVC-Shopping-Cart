@@ -6,11 +6,17 @@
     <variable
         name="productModel"
         type="com.example.mvvm_shopping_cart.models.ProductModel" />
+        <variable
+            name="shopInterface"
+            type="com.example.mvvm_shopping_cart.adapters.ShopItemsAdapter.ShopInterface" />
     </data>
 
     <LinearLayout
+        android:padding="12dp"
+        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:onClick="@{()-> shopInterface.onItemClick(productModel)}"
         android:layout_height="wrap_content">
 
 

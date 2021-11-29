@@ -1,6 +1,7 @@
 package com.example.mvvm_shopping_cart.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,6 +26,8 @@ class ShopFragment : Fragment(),ShopItemsAdapter.ShopInterface {
   lateinit  var fragmentShopBinding: FragmentShopBinding;
     lateinit var shopItemsAdapter: ShopItemsAdapter ;
     lateinit var shopViewModel : ShopViewModel
+    lateinit var navController: NavController
+    private  val TAG = "ShopFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +40,7 @@ class ShopFragment : Fragment(),ShopItemsAdapter.ShopInterface {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        shopItemsAdapter = ShopItemsAdapter();
+        shopItemsAdapter = ShopItemsAdapter(this);
 
 
         fragmentShopBinding.shopRV.adapter=shopItemsAdapter;
@@ -45,6 +50,7 @@ class ShopFragment : Fragment(),ShopItemsAdapter.ShopInterface {
         shopViewModel.getProducts().observe(viewLifecycleOwner,Observer{
             shopItemsAdapter.submitList(it);
         })
+        navController=  Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -53,7 +59,9 @@ class ShopFragment : Fragment(),ShopItemsAdapter.ShopInterface {
     }
 
     override fun onItemClick(productModel: ProductModel) {
-
+        Log.i("gello",productModel.toString());
+        shopViewModel.setProduct(productModel);
+        navController.navigate(R.id.action_shopFragment_to_productDetailsFragment);
     }
 
 
